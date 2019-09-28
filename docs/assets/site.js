@@ -7,7 +7,7 @@ anchors.add('h3');
 // Filter UI
 var tocElements = document.getElementById('toc').getElementsByTagName('li');
 
-document.getElementById('filter-input').addEventListener('keyup', function(e) {
+document.getElementById('filter-input').addEventListener('keyup', function (e) {
   var i, element, children;
 
   // enter key
@@ -22,14 +22,14 @@ document.getElementById('filter-input').addEventListener('keyup', function(e) {
     }
   }
 
-  var match = function() {
+  var match = function () {
     return true;
   };
 
   var value = this.value.toLowerCase();
 
   if (!value.match(/^\s*$/)) {
-    match = function(element) {
+    match = function (element) {
       var html = element.firstChild.innerHTML;
       return html && html.toLowerCase().indexOf(value) !== -1;
     };
@@ -51,7 +51,7 @@ for (var j = 0; j < items.length; j++) {
   items[j].addEventListener('click', toggleSibling);
 }
 
-function toggleSibling() {
+function toggleSibling () {
   var stepSibling = this.parentNode.getElementsByClassName('toggle-target')[0];
   var icon = this.getElementsByClassName('icon')[0];
   var klass = 'display-none';
@@ -64,7 +64,7 @@ function toggleSibling() {
   }
 }
 
-function showHashTarget(targetId) {
+function showHashTarget (targetId) {
   if (targetId) {
     var hashTarget = document.getElementById(targetId);
     // new target is hidden
@@ -78,7 +78,7 @@ function showHashTarget(targetId) {
   }
 }
 
-function scrollIntoView(targetId) {
+function scrollIntoView (targetId) {
   // Only scroll to element if we don't have a stored scroll position.
   if (targetId && !history.state) {
     var hashTarget = document.getElementById(targetId);
@@ -88,7 +88,7 @@ function scrollIntoView(targetId) {
   }
 }
 
-function gotoCurrentTarget() {
+function gotoCurrentTarget () {
   showHashTarget(location.hash.substring(1));
   scrollIntoView(location.hash.substring(1));
 }
@@ -101,7 +101,7 @@ for (var k = 0; k < toclinks.length; k++) {
   toclinks[k].addEventListener('mousedown', preOpen, false);
 }
 
-function preOpen() {
+function preOpen () {
   showHashTarget(this.hash.substring(1));
 }
 
@@ -114,14 +114,14 @@ var cw_without_sb = split_left.clientWidth;
 split_left.style.overflow = '';
 
 Split(['#split-left', '#split-right'], {
-  elementStyle: function(dimension, size, gutterSize) {
+  elementStyle: function (dimension, size, gutterSize) {
     return {
-      'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)'
+      'flex-basis': `calc(${size}% - ${gutterSize}px)`
     };
   },
-  gutterStyle: function(dimension, gutterSize) {
+  gutterStyle: function (dimension, gutterSize) {
     return {
-      'flex-basis': gutterSize + 'px'
+      'flex-basis': `${gutterSize}px`
     };
   },
   gutterSize: 20,
@@ -131,7 +131,7 @@ Split(['#split-left', '#split-right'], {
 // Chrome doesn't remember scroll position properly so do it ourselves.
 // Also works on Firefox and Edge.
 
-function updateState() {
+function updateState () {
   history.replaceState(
     {
       left_top: split_left.scrollTop,
@@ -141,7 +141,7 @@ function updateState() {
   );
 }
 
-function loadState(ev) {
+function loadState (ev) {
   if (ev) {
     // Edge doesn't replace change history.state on popstate.
     history.replaceState(ev.state, document.title);
@@ -152,9 +152,9 @@ function loadState(ev) {
   }
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   // Restore after Firefox scrolls to hash.
-  setTimeout(function() {
+  setTimeout(function () {
     loadState();
     // Update with initial scroll position.
     updateState();

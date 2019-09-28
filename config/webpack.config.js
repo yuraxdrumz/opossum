@@ -50,7 +50,7 @@ function generateConfig (name) {
     plugins: [
       new webpack.IgnorePlugin(/prom-client/),
       new webpack.ProvidePlugin({
-        'circuitBreaker': 'opossum'
+        circuitBreaker: 'opossum'
       }),
       new webpack.DefinePlugin({
         'process.env': {
